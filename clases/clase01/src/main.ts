@@ -4,8 +4,8 @@ import { Application, Sprite, Assets } from 'pixi.js';
 
 //Importa imagen para que el empaquetador de Vite
 //lo exporte para produccion
-import imgClampy from '../static/clampy.png';
-import imgToad from '../static/toadmario.png';
+// import imgClampy from '../static/clampy.png';
+// import imgToad from '../static/toadmario.png';
 
 const app = new Application<HTMLCanvasElement>({
   view: document.getElementById('pixi-canvas') as HTMLCanvasElement,
@@ -16,8 +16,9 @@ const app = new Application<HTMLCanvasElement>({
   height: 480,
 });
 
-Assets.add('Clampy', imgClampy);
-Assets.add('myToad', imgToad);
+/*Vitejs importa los archivos estaticos de la carpeta /public*/
+Assets.add('Clampy', 'img/clampy.png');
+Assets.add('myToad', 'img/toadmario.png');
 
 Assets.load(['Clampy', 'myToad']).then(() => {
   const myToad: Sprite = Sprite.from('myToad');
