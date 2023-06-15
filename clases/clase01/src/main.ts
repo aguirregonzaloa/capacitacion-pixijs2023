@@ -1,10 +1,11 @@
 import './style.css';
 
-import { Application, Sprite } from 'pixi.js';
+import { Application, Sprite, Assets } from 'pixi.js';
 
 //Importa imagen para que el empaquetador de Vite
 //lo exporte para produccion
 import imgClampy from '../static/clampy.png';
+import imgToad from '../static/toadmario.png';
 
 const app = new Application<HTMLCanvasElement>({
   view: document.getElementById('pixi-canvas') as HTMLCanvasElement,
@@ -15,13 +16,19 @@ const app = new Application<HTMLCanvasElement>({
   height: 480,
 });
 
-const clampy: Sprite = Sprite.from(imgClampy);
+Assets.add('Clampy', imgClampy);
+Assets.add('myToad', imgToad);
 
-clampy.anchor.set(0.5);
+Assets.load(['Clampy', 'myToad']).then(() => {
+  const myToad: Sprite = Sprite.from('myToad');
+  console.log('Hola mundo!', myToad.width, myToad.height);
 
-clampy.x = app.screen.width / 2;
-clampy.y = app.screen.height / 2;
+  myToad.anchor.set(0.5);
 
-app.stage.addChild(clampy);
+  myToad.x = app.screen.width / 2;
+  myToad.y = app.screen.height / 2;
+
+  app.stage.addChild(myToad);
+});
 
 document.body.appendChild(app.view);
