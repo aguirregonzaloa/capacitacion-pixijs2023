@@ -1,63 +1,70 @@
 import './style.css';
+import { Application, Sprite, Assets, Container, Point } from 'pixi.js';
 
-import * as PIXI from 'pixi.js';
+const app = new Application<HTMLCanvasElement>({
+  view: document.getElementById('pixi-canvas') as HTMLCanvasElement,
+  resolution: window.devicePixelRatio || 1,
+  autoDensity: true,
+  backgroundColor: 0x6495ed,
+  width: 640,
+  height: 480,
+});
 
-const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb' });
+window.addEventListener('resize', () => {
+  // console.log('Resizing the window');
+
+  const scaleX = window.innerWidth / app.screen.width;
+  const scaleY = window.innerHeight / app.screen.height;
+  const scale = Math.min(scaleX, scaleY);
+
+  const gameWidth = Math.round(app.screen.width * scale);
+  const gameHeight = Math.round(app.screen.height * scale);
+
+  const marginHorizantal = Math.floor((window.innerWidth - gameWidth) / 2);
+  const marginVertical = Math.floor((window.innerHeight - gameHeight) / 2);
+
+  app.view.style.width = gameWidth + 'px';
+  app.view.style.height = gameHeight + 'px';
+
+  app.view.style.marginLeft = marginHorizantal + 'px';
+  app.view.style.marginRight = marginHorizantal + 'px';
+  app.view.style.marginBottom = marginVertical + 'px';
+  app.view.style.marginTop = marginVertical + 'px';
+});
+
+window.dispatchEvent(new Event('resize'));
+
+/*Vitejs importa los archivos estaticos de la carpeta /public */
+Assets.add('Dino', './dino.png');
+Assets.add('Hat', './hat.png');
+
+Assets.load(['Dino', 'Hat']).then(() => {
+  const Dino: Sprite = Sprite.from('Dino');
+  const Hat: Sprite = Sprite.from('Hat');
+
+  const DinoWithHat = new Container();
+
+  Hat.scale.set(0.5);
+  Hat.position.set(67, -60);
+
+  DinoWithHat.x = 150;
+  DinoWithHat.y = 200;
+
+  DinoWithHat.addChild(Dino);
+  DinoWithHat.addChild(Hat);
+
+  console.log('Dino Position: ', Dino.position.x, Dino.position.y);
+  console.log('Hat Position: ', Hat.position.x, Hat.position.y);
+  console.log(
+    'DinoWithHat Position: ',
+    DinoWithHat.position.x,
+    DinoWithHat.position.y
+  );
+
+  console.log(Hat.toGlobal(new Point()));
+  console.log(Hat.toLocal(new Point()));
+
+  app.stage.addChild(DinoWithHat);
+});
+
 document.body.appendChild(app.view);
-
-const basicText = new PIXI.Text('Basic text in pixi');
-basicText.x = 50;
-basicText.y = 100;
-
-app.stage.addChild(basicText);
-
-const style = new PIXI.TextStyle({
-  fontFamily: 'Arial',
-  fontSize: 36,
-  fontStyle: 'italic',
-  fontWeight: 'bold',
-  fill: ['#ffffff', '#00ff99'], // gradient
-  stroke: '#4a1850',
-  strokeThickness: 5,
-  dropShadow: true,
-  dropShadowColor: '#000000',
-  dropShadowBlur: 4,
-  dropShadowAngle: Math.PI / 6,
-  dropShadowDistance: 6,
-  wordWrap: true,
-  wordWrapWidth: 440,
-  lineJoin: 'round',
-});
-
-const richText = new PIXI.Text(
-  'Rich text with a lot of options and across multiple lines',
-  style
-);
-richText.x = 50;
-richText.y = 220;
-
-app.stage.addChild(richText);
-
-const skewStyle = new PIXI.TextStyle({
-  fontFamily: 'Arial',
-  dropShadow: true,
-  dropShadowAlpha: 0.8,
-  dropShadowAngle: 2.1,
-  dropShadowBlur: 4,
-  dropShadowColor: '0x111111',
-  dropShadowDistance: 10,
-  fill: ['#ffffff'],
-  stroke: '#004620',
-  fontSize: 60,
-  fontWeight: 'lighter',
-  lineJoin: 'round',
-  strokeThickness: 12,
-});
-
-const skewText = new PIXI.Text('SKEW IS COOL', skewStyle);
-skewText.skew.set(0.65, -0.3);
-skewText.anchor.set(0.5, 0.5);
-skewText.x = 300;
-skewText.y = 480;
-
-app.stage.addChild(skewText);
