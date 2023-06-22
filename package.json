@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:clase01": "pnpm --filter clase01 run dev",
-    "dev:clase02": "pnpm --filter clase02 run dev"
+    "dev:clase02": "pnpm --filter clase02 run dev",
+    "dev:clase03": "pnpm --filter clase03 run dev"
   },
   "keywords": [],
   "author": "",

@@ -34,6 +34,19 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9
 
+  clases/clase03:
+    dependencies:
+      pixi.js:
+        specifier: ^7.2.4
+        version: 7.2.4(@pixi/utils@7.2.4)
+    devDependencies:
+      typescript:
+        specifier: ^5.0.2
+        version: 5.0.2
+      vite:
+        specifier: ^4.3.9
+        version: 4.3.9
+
 packages:
 
   /@esbuild/android-arm64@0.17.19:
