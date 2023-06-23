@@ -1,12 +1,17 @@
-import { Container, AnimatedSprite, Texture } from 'pixi.js';
+import { Container, AnimatedSprite, Texture, Graphics, Text } from 'pixi.js';
 import DinoWithHat from './DinoWithHat';
 
 class Scene extends Container {
   constructor() {
     super();
+
+    //Clase DinoWithHat
     const Dino = new DinoWithHat();
 
     console.log('DinoWithHat Position: ', Dino.position.x, Dino.position.y);
+    this.addChild(Dino);
+    //-------------------------//
+    //Clase AnimatedSprite
 
     const girlAnimated = new AnimatedSprite(
       [
@@ -21,12 +26,22 @@ class Scene extends Container {
       ],
       true
     );
-
+    girlAnimated.scale.set(0.5);
     girlAnimated.play();
     girlAnimated.animationSpeed = 0.2;
 
-    this.addChild(Dino);
     this.addChild(girlAnimated);
+    //-----------------------------//
+    //Graphics
+    const myGraph = new Graphics();
+
+    myGraph.lineStyle({ color: 0xff00ff, width: 10, alpha: 1 });
+    myGraph.beginFill(0x0000ff, 1);
+    myGraph.drawCircle(0, 0, 50);
+
+    myGraph.position.set(420, 240);
+
+    this.addChild(myGraph);
   }
 }
 
