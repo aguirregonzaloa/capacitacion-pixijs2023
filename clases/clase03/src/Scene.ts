@@ -1,5 +1,6 @@
 import { Container, AnimatedSprite, Texture, Graphics, Text } from 'pixi.js';
 import DinoWithHat from './DinoWithHat';
+import UI from './UI';
 
 class Scene extends Container {
   constructor() {
@@ -42,6 +43,19 @@ class Scene extends Container {
     myGraph.position.set(420, 240);
 
     this.addChild(myGraph);
+    /*-----------------------------
+      Text
+    */
+
+    const myText = new Text('Esto es un texto');
+    myText.position.set(400, 300);
+
+    this.addChild(myText);
+    /*--------------------------------
+      UI
+      */
+    const ui = new UI();
+    this.addChild(ui);
   }
 }
 
