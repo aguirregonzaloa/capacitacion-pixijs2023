@@ -5,12 +5,25 @@ class UI extends Container {
   constructor() {
     super();
 
-    const btnActive = new Btn();
-    const btnNormal = new Btn();
-    btnActive.setSprite(Texture.from('btnActive'));
-    btnActive.setText('Button Active');
-    btnNormal.setSprite(Texture.from('btnNormal'));
-    btnNormal.setText('Button Normal');
+    const btnPlayGame = new Btn(
+      Texture.from('btnNormal'),
+      Texture.from('btnActive'),
+      Texture.from('btnHover')
+    );
+    const btnSettings = new Btn(
+      Texture.from('btnNormal'),
+      Texture.from('btnActive'),
+      Texture.from('btnHover')
+    );
+    const btnQuitGame = new Btn(
+      Texture.from('btnNormal'),
+      Texture.from('btnActive'),
+      Texture.from('btnHover')
+    );
+
+    btnPlayGame.setText('Iniciar Juego');
+    btnSettings.setText('Configuracion');
+    btnQuitGame.setText('Salir');
 
     const background = new NineSlicePlane(
       Texture.from('card1'),
@@ -20,11 +33,13 @@ class UI extends Container {
       35
     );
     this.position.set(50, 30);
-    btnActive.position.set(100, 100);
-    btnNormal.position.set(100, 150);
+    btnPlayGame.position.set(100, 100);
+    btnSettings.position.set(100, 150);
+    btnQuitGame.position.set(100, 200);
     this.addChild(background);
-    this.addChild(btnActive);
-    this.addChild(btnNormal);
+    this.addChild(btnPlayGame);
+    this.addChild(btnSettings);
+    this.addChild(btnQuitGame);
   }
 }
 
