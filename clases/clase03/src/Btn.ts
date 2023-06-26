@@ -28,7 +28,6 @@ class Btn extends Container {
     // this.BtnText.position.y = this.height / 2;
     this.BtnText.position.y =
       this.height / 2 - (this.TextStyle.fontSize as number) / 2;
-    console.log('Sprite Btn: ', this.width, this.height);
   };
 }
 
